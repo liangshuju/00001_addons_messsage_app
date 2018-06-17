@@ -96,18 +96,24 @@ public class MainMessageActivity extends AppCompatActivity {
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "Send Message : counts = " + buttonCounts);
-                Message msg = new Message();
-                myHandler.sendMessage(msg);
-                buttonCounts ++;
 
                 myHandler3.post(new Runnable() {
                     @Override
                     public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         Log.i(TAG, "myHandler3 get message : messageCounts = " + messageCounts);
                         messageCounts ++;
                     }
                 });
+
+                Log.i(TAG, "Send Message : counts = " + buttonCounts);
+                Message msg = new Message();
+                myHandler.sendMessage(msg);
+                buttonCounts ++;
             }
         });
 
