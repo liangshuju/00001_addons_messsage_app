@@ -1,6 +1,7 @@
 package angfly.anos.ask.app.addons.app_addons_00001_message;
 
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,10 @@ public class MainMessageActivity extends AppCompatActivity {
     private Handler myHandler = null;
 
     private int messageCounts = 0;
+
+    private HandlerThread myHandlerThread3 = null;
+
+    private Handler myHandler3 = null;
 
     class MyRunnable implements Runnable {
 
@@ -95,6 +100,14 @@ public class MainMessageActivity extends AppCompatActivity {
                 Message msg = new Message();
                 myHandler.sendMessage(msg);
                 buttonCounts ++;
+
+                myHandler3.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i(TAG, "myHandler3 get message : messageCounts = " + messageCounts);
+                        messageCounts ++;
+                    }
+                });
             }
         });
 
@@ -113,6 +126,10 @@ public class MainMessageActivity extends AppCompatActivity {
             }
         });
 
+        myHandlerThread3 = new HandlerThread("MessageTestHandlerThread3");
+        myHandlerThread3.start();
+
+        myHandler3 = new Handler(myHandlerThread3.getLooper());
     }
 
 }
