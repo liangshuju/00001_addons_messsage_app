@@ -1,1 +1,1 @@
-#define APP_APP_TO_HARDWARE_00001 "v1.0.0"
+#define APP_APP_TO_HARDWARE_00001 "v1.0.1"
